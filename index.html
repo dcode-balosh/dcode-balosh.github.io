@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://v4-alpha.getbootstrap.com/favicon.ico">
+
+    <title>DCode</title>
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="index.css" rel="stylesheet">
+    <script type="text/javascript" src="index.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+    <hr>
+    <div class="container">
+        <div id="links" class="links break">
+            <h1>Links:</h1>
+            <a href="#contact" class="btn btn-link" role="button">Contact Form</a>
+            <a href="https://github.com/dcode-balosh?tab=repositories" class="btn btn-link" role="button">GitHub
+                page</a>
+            <h1>Notes:</h1>
+            <a href="#git_dates" class="btn btn-link" role="button">Git Dates Near Epoc</a>
+            <a href="#git_ssh_gpg" class="btn btn-link" role="button">Git Github/Gitlab SSH, GPG and auto sign
+                configuration</a>
+        </div>
+    </div>
+    <div class="container">
+        <hr>
+        <div id="notes" class="break">
+            <h3>Git dates</h3>
+            <pre id="git_dates">
+Setting up ubuntu environment variables
+    Git dates
+        Say you want some date privacy, so that the default commit date would be near linux epoc.
+        Edit ~/.pam_environment and insert the following lines:
+        The small details here:
+            * ~/.pam_environment won't handle whitespace, even inside "", using T instead
+            * Git won't accept "0 +0000" as valid time using this format.
+        <code>GIT_AUTHOR_DATE="100000000T+0000"</code>
+        <code>GIT_COMMITTER_DATE="100000000T+0000"</code>
+        Helpful links:
+            <a href="https://kevin.deldycke.com/2013/06/git-invalid-date-format/">https://kevin.deldycke.com/2013/06/git-invalid-date-format/</a>
+            <a href="https://github.com/git/git/blob/v2.3.0/Documentation/date-formats.txt">https://github.com/git/git/blob/v2.3.0/Documentation/date-formats.txt</a>
+            <a href="https://help.ubuntu.com/community/EnvironmentVariables#A.2BAH4-.2F.pam_environment">https://help.ubuntu.com/community/EnvironmentVariables</a>
+            <a href="http://mcs.une.edu.au/doc/pam/html/sag-pam_env.html">http://mcs.une.edu.au/doc/pam/html/sag-pam_env.html</a>
+        </pre>
+            <a href="#links" class="btn btn-default" role="button">Up!</a>
+            <h3>GitHub/GitLab setup</h3>
+            <pre id="git_ssh_gpg">
+Say you want to use GitHub/GitLab but don't want to enter user pass each time, and want your actions be signed.
+Links are for GitHub, it is pretty much the same for GitLab.
+Follow the links, then in order to commit without entering password:
+    * create file with the password: ~/.keys/gpg_pass.txt
+    * create sh file to read the file into gpg:
+            file:       <code>~/bin/pass_gpg.sh</code>
+            content:    <code>gpg --no-tty --passphrase-file=/home/daniel/.keys/dcode_gpg_pass.txt $*</code>
+    * set this batch as gpg program for git:
+            <code>git config --global gpg.program "/home/daniel/bin/pass_gpg.sh"</code>
+The small details here:
+    * Use gpg, not gpg2, I couldn't make gpg2 read password from file in a normal way.
+    * Without --no-tty Rubymine failed to commit.
+    * Use git log --show-signature to see the signature as expected
+    * When cloning, use the SSH option, not the HTTPS one, you can check state using <code>git remove -v</code> expecting git@github.com
+    * Check at GitHub commits you have "Verified" tag on the signed commit.
+Helpful links:
+    <a href="https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent//">https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/</a>
+    <a href="https://help.github.com/articles/signing-commits-with-gpg/">https://help.github.com/articles/signing-commits-with-gpg/</a>
+</pre>
+            <a href="#links" class="btn btn-default" role="button">Up!</a>
+        </div>
+    </div>
+    <div class="container">
+        <hr>
+        <div id="contact" class="break">
+            <button id='email' onclick="delay_email()">Show mail to button</button>
+            <br>
+            <a href="#links" class="btn btn-default" role="button">Up!</a>
+        </div>
+    </div>
+</div><!-- /.container -->
+</body>
+
+</html>
