@@ -66,6 +66,10 @@ Follow the links, then in order to commit without entering password:
             content:    <code>gpg --no-tty --passphrase-file=/home/daniel/.keys/dcode_gpg_pass.txt $*</code>
     * set this batch as gpg program for git:
             <code>git config --global gpg.program "/home/daniel/bin/pass_gpg.sh"</code>
+    * Tell git what key to use:
+            <code>git config --global user.signingkey keyname</code>
+    * Tell git to always sign:
+            <code>git config --global commit.gpgsign true</code>
 The small details here:
     * Use gpg, not gpg2, I couldn't make gpg2 read password from file in a normal way.
     * Without --no-tty Rubymine failed to commit.
